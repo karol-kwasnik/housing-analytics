@@ -55,6 +55,7 @@ CREATE TABLE ref.county_classification (
     voivodeship   NVARCHAR(100) NULL,
     county_type   VARCHAR(30)   NULL,
     agglomeration NVARCHAR(100) NULL,
+    geo_name      NVARCHAR(300) NULL,
     latitude      DECIMAL(9,6)  NULL,
     longitude     DECIMAL(9,6)  NULL
 );
