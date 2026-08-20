@@ -25,24 +25,32 @@
 
 # CELL ********************
 
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+
 for t in ["variable", "ingestion_config", "quality_attribute",
           "county_classification", "credit_parameter"]:
     (spark.read.parquet(f"Files/landing/ref/{t}")
           .write.mode("overwrite").option("overwriteSchema", "true")
           .saveAsTable(t))
 
-display(spark.table("quality_attribute"))
+schema = StructType([
+    StructField("results", ArrayType(StructType([
+        StructField("id", StringType()),
+        StructField("name", StringType()),
+        StructField("values", ArrayType(StructType([
+            StructField("year", StringType()),
+            StructField("val", DoubleType()),
+            StructField("attrId", IntegerType())
+        ])))
+    ])))
+])
 
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-from pyspark.sql.window import Window
+raw_files = (spark.read
+    .schema(schema)
+    .option("basePath", "Files/landing/bdl/")
+    .json("Files/landing/bdl/ingestion_date=*/variable_id=*/data.json"))
 
 parsed = (raw_files
     .select("variable_id", "ingestion_date", explode("results").alias("unit"))
@@ -85,23 +93,6 @@ deduped = clean.withColumn("rn", row_number().over(w)).filter(col("rn") == 1).dr
     .write.mode("overwrite").option("overwriteSchema", "true")
     .saveAsTable("lh_silver.fact_bdl"))
 
-print("rows:", spark.table("lh_silver.fact_bdl").count())
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-display(spark.sql("""
-    SELECT year, val, value, quality_flag, attribute_id
-    FROM lh_silver.fact_bdl
-    WHERE teryt_code = '012414967000' AND variable_id = 64428
-    ORDER BY year
-"""))
 
 # METADATA ********************
 
