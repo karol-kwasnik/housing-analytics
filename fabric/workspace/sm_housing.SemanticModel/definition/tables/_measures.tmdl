@@ -1,0 +1,395 @@
+table _measures
+	lineageTag: f6e1c66f-d660-4ac9-a573-84e1202ab589
+	sourceLineageTag: [dbo].[_measures]
+
+	measure 'Avg Price sqm' = AVERAGE ( fact_market[avg_price_sqm] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Prices
+		lineageTag: a7b8ca51-039e-408f-aa19-1f78a9e734a7
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Median Price sqm' = AVERAGE ( fact_market[median_price_sqm] )
+		formatString: #,##0 "zł"
+		displayFolder: Prices
+		lineageTag: eb35a89e-6871-4ab1-abdb-439fa5c302c1
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Price sqm YoY %' =
+			
+			VAR CurrentPrice = [Median Price sqm]
+			VAR PreviousPrice =
+			    CALCULATE ( [Median Price sqm], SAMEPERIODLASTYEAR ( dim_date[full_date] ) )
+			RETURN
+			    DIVIDE ( CurrentPrice - PreviousPrice, PreviousPrice )
+		displayFolder: Prices
+		lineageTag: 953fe258-8711-4266-8239-84955c24d659
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Price sqm Change since 2010 %' =
+			
+			VAR BasePrice =
+			    CALCULATE ( [Median Price sqm], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
+			RETURN
+			    DIVIDE ( [Median Price sqm] - BasePrice, BasePrice )
+		displayFolder: Prices
+		lineageTag: 23388184-8999-481a-b509-9ee0223a29f2
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Primary Market Premium %' =
+			
+			VAR PrimaryPrice =
+			    CALCULATE ( [Median Price sqm], dim_market_type[market_type] = "rynek pierwotny" )
+			VAR SecondaryPrice =
+			    CALCULATE ( [Median Price sqm], dim_market_type[market_type] = "rynek wtórny" )
+			RETURN
+			    DIVIDE ( PrimaryPrice - SecondaryPrice, SecondaryPrice )
+		displayFolder: Prices
+		lineageTag: aa3395fd-732d-48f5-95d2-7f063ec0b7f0
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dwellings Sold' = SUM ( fact_market[dwellings_sold] )
+		formatString: 0
+		displayFolder: Market
+		lineageTag: 28197a76-bae4-4465-887b-7d800f5d6282
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	measure 'Floor Area Sold' = SUM ( fact_market[floor_area_sold] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Market
+		lineageTag: 87ab6c7e-60d4-4389-9dd7-1d8273fd2f78
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Share of National Market %' =
+			
+			DIVIDE (
+			    [Dwellings Sold],
+			    CALCULATE ( [Dwellings Sold], REMOVEFILTERS ( dim_territory ) )
+			)
+		displayFolder: Market
+		lineageTag: 66fd8cfb-bc5d-46fd-a99b-ae72f9089514
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Price Rank' =
+			
+			VAR Ranking =
+			    RANKX (
+			        ALLSELECTED ( dim_territory[teryt_code] ),
+			        CALCULATE ( [Median Price sqm] ),
+			        ,
+			        DESC,
+			        DENSE
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( [Median Price sqm] ), Ranking )
+		formatString: 0
+		displayFolder: Market
+		lineageTag: c976a600-5018-48ad-973b-3385bb2e9a04
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure 'Dwellings Completed' = SUM ( fact_context[dwellings_completed] )
+		formatString: 0
+		displayFolder: Market
+		lineageTag: 4ffc55cb-2a98-4d1b-91ee-8771c0c89234
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure Population = SUM ( fact_context[population] )
+		formatString: 0
+		displayFolder: Market
+		lineageTag: 31f09696-cbfd-476a-8dbc-fdce9a8eea76
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure 'Rate Value' = SELECTEDVALUE ( param_rate[rate], 0.0575 )
+		displayFolder: Simulator
+		lineageTag: 4160a5dd-ecad-48b4-a497-6050b1e67ee6
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Down Payment Value' = SELECTEDVALUE ( param_down_payment[down_payment], [Min Down Payment] )
+		displayFolder: Simulator
+		lineageTag: 4cda20b5-6a8d-493d-bffb-5d13cd19588a
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure 'Loan Years Value' = SELECTEDVALUE ( param_loan_years[loan_years], 25 )
+		formatString: 0
+		displayFolder: Simulator
+		lineageTag: 27bbe980-0239-4f9e-b5f4-7a0837071629
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure 'Floor Area Value' = SELECTEDVALUE ( param_floor_area[floor_area], 50 )
+		formatString: 0
+		displayFolder: Simulator
+		lineageTag: ffbe2fe8-7211-41fd-a9af-4cbf171a1be5
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure 'Property Price' = [Median Price sqm] * [Floor Area Value]
+		formatString: #,##0 "zł"
+		displayFolder: Simulator
+		lineageTag: 89be486c-1da7-40b9-978d-3a2ef624775c
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Loan Amount' = [Property Price] * ( 1 - [Down Payment Value] )
+		formatString: #,##0 "zł"
+		displayFolder: Simulator
+		lineageTag: ccabff07-a125-49fb-9eaf-b6363e6e89f7
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Monthly Payment' =
+			
+			VAR Principal = [Loan Amount]
+			VAR MonthlyRate = ( [Rate Value] + [Bank Margin] ) / 12
+			VAR Months = [Loan Years Value] * 12
+			RETURN
+			    IF (
+			        MonthlyRate > 0,
+			        DIVIDE (
+			            Principal * MonthlyRate * POWER ( 1 + MonthlyRate, Months ),
+			            POWER ( 1 + MonthlyRate, Months ) - 1
+			        ),
+			        DIVIDE ( Principal, Months )
+			    )
+		formatString: #,##0.00 "zł"
+		displayFolder: Simulator
+		lineageTag: edc0f362-b499-4b87-8ad6-2e0b51af2ce3
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Payment to Income %' = DIVIDE ( [Monthly Payment], [Net Salary] )
+		displayFolder: Simulator
+		lineageTag: ffbf20da-84a7-4c53-ba2b-94670c95ae36
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	measure 'Net to Gross' =
+			
+			CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "net_to_gross" )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Affordability
+		lineageTag: 7b171ab0-59b2-4939-a0a0-57d246eaf94f
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Bank Margin' =
+			
+			CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "bank_margin" )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Affordability
+		lineageTag: 4d05a616-7686-4ce3-a31d-5956e80e810a
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Min Down Payment' =
+			
+			CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "min_down_payment" )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Affordability
+		lineageTag: b2935194-0960-4884-8a80-0d941438b84d
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Gross Salary' = AVERAGE ( fact_context[avg_gross_salary] )
+		formatString: #,##0 "zł"
+		displayFolder: Affordability
+		lineageTag: 18b02cf1-6fe1-4abc-af99-38ca030f8c7e
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Net Salary' = [Gross Salary] * [Net to Gross]
+		formatString: " #,##0 ""zł"""
+		displayFolder: Affordability
+		lineageTag: 6dbefb00-b792-4cec-a852-51ce2768ccea
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Sqm per Monthly Salary' = DIVIDE ( [Net Salary], [Median Price sqm] )
+		displayFolder: Affordability
+		lineageTag: 49144667-adba-4b07-83c3-0f3aa12a3f76
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Years of Work' = DIVIDE ( [Median Price sqm] * [Floor Area Value], [Net Salary] * 12 )
+		formatString: 0.0
+		displayFolder: Affordability
+		lineageTag: 083fe7ad-326e-431e-a913-9c526d4bde25
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Affordability Index' =
+			
+			DIVIDE (
+			    [Sqm per Monthly Salary],
+			    CALCULATE ( [Sqm per Monthly Salary], REMOVEFILTERS ( dim_territory ) )
+			) * 100
+		displayFolder: Affordability
+		lineageTag: dee2f00a-355a-4d36-8948-14f4b3ea09a7
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Completeness %' =
+			
+			DIVIDE ( COUNT ( fact_market[median_price_sqm] ), COUNTROWS ( fact_market ) )
+		displayFolder: Quality
+		lineageTag: 3ad178f9-2299-470c-8a20-612f307f2d6c
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Small Sample Warning' =
+			
+			IF (
+			    NOT ISBLANK ( [Dwellings Sold] ) && [Dwellings Sold] < 10,
+			    "Small sample - median unreliable",
+			    BLANK ()
+			)
+		displayFolder: Quality
+		lineageTag: 382c31d9-bc95-4c2f-8fd1-04fe847b9514
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+	column placeholder
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a90a44f5-acf3-4469-8491-df539db9e346
+		sourceLineageTag: placeholder
+		summarizeBy: none
+		sourceColumn: placeholder
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _measures = entity
+		mode: directLake
+		source
+			entityName: _measures
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

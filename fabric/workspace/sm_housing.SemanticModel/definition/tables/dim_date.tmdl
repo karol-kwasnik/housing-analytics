@@ -1,0 +1,84 @@
+table dim_date
+	lineageTag: 41a3b507-7892-4f01-af32-329f4ed720fc
+	sourceLineageTag: [dbo].[dim_date]
+	dataCategory: Time
+
+	column date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f4074dbe-3dc7-4bb1-810a-296232bf0505
+		sourceLineageTag: date_sk
+		summarizeBy: none
+		sourceColumn: date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_date
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: bebfc1ae-fba1-43d4-a3f5-a4fd605bbbac
+		sourceLineageTag: full_date
+		summarizeBy: none
+		sourceColumn: full_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 92499243-3cc8-4850-a971-1b537ca308b4
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4b41338c-3a1f-408e-8e8c-16a145a42588
+		sourceLineageTag: quarter
+		summarizeBy: sum
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 881c0988-5077-4a36-b5dd-c3a80522fc9f
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_year_end
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: cadc1387-9ac8-4e27-98c3-eebcc48bb478
+		sourceLineageTag: is_year_end
+		summarizeBy: none
+		sourceColumn: is_year_end
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

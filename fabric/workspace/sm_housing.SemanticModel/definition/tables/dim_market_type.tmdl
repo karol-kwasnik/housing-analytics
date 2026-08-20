@@ -1,0 +1,37 @@
+table dim_market_type
+	lineageTag: 47117c84-676b-4c0b-b688-b6b81b85c74d
+	sourceLineageTag: [dbo].[dim_market_type]
+
+	column market_type_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f888d7ac-f19f-4840-a123-59bef25c496e
+		sourceLineageTag: market_type_sk
+		summarizeBy: none
+		sourceColumn: market_type_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column market_type
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 2d50dc57-165c-487b-9c71-fa91235dbedc
+		sourceLineageTag: market_type
+		summarizeBy: none
+		sourceColumn: market_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_market_type = entity
+		mode: directLake
+		source
+			entityName: dim_market_type
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

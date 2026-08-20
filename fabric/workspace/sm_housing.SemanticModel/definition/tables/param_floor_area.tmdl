@@ -1,0 +1,24 @@
+table param_floor_area
+	lineageTag: 12b90059-8a8b-444b-866a-d899b00ba0eb
+	sourceLineageTag: [dbo].[param_floor_area]
+
+	column floor_area
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9be73a37-b35b-4ce6-99f2-6d19e4d91da1
+		sourceLineageTag: floor_area
+		summarizeBy: sum
+		sourceColumn: floor_area
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_floor_area = entity
+		mode: directLake
+		source
+			entityName: param_floor_area
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

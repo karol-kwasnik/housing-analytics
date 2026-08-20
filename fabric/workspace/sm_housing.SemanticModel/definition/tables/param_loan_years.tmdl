@@ -1,0 +1,24 @@
+table param_loan_years
+	lineageTag: 4c0b609c-056f-4b56-97e6-2576e566cfd3
+	sourceLineageTag: [dbo].[param_loan_years]
+
+	column loan_years
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 425b0e8a-a3c5-4ab0-82b0-6d16239047be
+		sourceLineageTag: loan_years
+		summarizeBy: sum
+		sourceColumn: loan_years
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_loan_years = entity
+		mode: directLake
+		source
+			entityName: param_loan_years
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

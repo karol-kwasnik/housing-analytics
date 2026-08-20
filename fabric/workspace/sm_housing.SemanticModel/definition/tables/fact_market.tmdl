@@ -1,0 +1,156 @@
+table fact_market
+	lineageTag: 1ddacc11-833a-48ef-bf3b-208b89b3efb0
+	sourceLineageTag: [dbo].[fact_market]
+
+	column territory_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5e0364b6-881c-4f77-a414-cd99c2663595
+		sourceLineageTag: territory_sk
+		summarizeBy: none
+		sourceColumn: territory_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7a5e9078-7a0e-4306-ab40-573c5129f384
+		sourceLineageTag: date_sk
+		summarizeBy: none
+		sourceColumn: date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column market_type_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c0ebfa6f-ce9a-4da1-8a9a-65b5552c13e2
+		sourceLineageTag: market_type_sk
+		summarizeBy: none
+		sourceColumn: market_type_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column size_range_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6304adcf-a457-47ca-8473-170531b7f856
+		sourceLineageTag: size_range_sk
+		summarizeBy: none
+		sourceColumn: size_range_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column reliability_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2607d0d8-3c0f-45e1-9217-c311ca61641b
+		sourceLineageTag: reliability_sk
+		summarizeBy: none
+		sourceColumn: reliability_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column median_price_sqm
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 14961325-777e-4bc7-874f-0a5ec375fbb9
+		sourceLineageTag: median_price_sqm
+		summarizeBy: sum
+		sourceColumn: median_price_sqm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_price_sqm
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 1a5f9f10-c893-46f5-b147-b5c91051e25f
+		sourceLineageTag: avg_price_sqm
+		summarizeBy: sum
+		sourceColumn: avg_price_sqm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_dwelling_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 2)
+		lineageTag: 96acd6ba-4b6f-4d8e-99a1-fbdb8bb93657
+		sourceLineageTag: avg_dwelling_price
+		summarizeBy: sum
+		sourceColumn: avg_dwelling_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column dwellings_sold
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 511b2fee-2fab-463e-b723-00ad82e3f680
+		sourceLineageTag: dwellings_sold
+		summarizeBy: sum
+		sourceColumn: dwellings_sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column floor_area_sold
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 2)
+		lineageTag: 4fc7e78f-61de-4441-813b-9b5e533e3cab
+		sourceLineageTag: floor_area_sold
+		summarizeBy: sum
+		sourceColumn: floor_area_sold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column quality_flag
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 33908364-6fe2-44bc-a7b7-969ca1dbed03
+		sourceLineageTag: quality_flag
+		summarizeBy: none
+		sourceColumn: quality_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_market = entity
+		mode: directLake
+		source
+			entityName: fact_market
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

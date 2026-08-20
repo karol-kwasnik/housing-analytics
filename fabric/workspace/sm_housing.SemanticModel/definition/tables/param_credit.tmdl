@@ -1,0 +1,46 @@
+table param_credit
+	lineageTag: e21da70d-27c1-4f11-a8cc-f0c0fb8f6909
+	sourceLineageTag: [dbo].[param_credit]
+
+	column parameter_name
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: f109a76c-7a2a-4687-9149-68865527e87d
+		sourceLineageTag: parameter_name
+		summarizeBy: none
+		sourceColumn: parameter_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_value
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 4)
+		lineageTag: befc4002-182e-433a-83cd-613d64291792
+		sourceLineageTag: parameter_value
+		summarizeBy: sum
+		sourceColumn: parameter_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column description
+		dataType: string
+		sourceProviderType: varchar(200)
+		lineageTag: 5c4a482c-8913-4314-bf05-7bf8e504459e
+		sourceLineageTag: description
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_credit = entity
+		mode: directLake
+		source
+			entityName: param_credit
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

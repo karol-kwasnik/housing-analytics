@@ -1,0 +1,140 @@
+table dim_territory
+	lineageTag: 980c9d4a-8550-422e-942a-15571b98df0a
+	sourceLineageTag: [dbo].[dim_territory]
+
+	column territory_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5d0f6977-84bc-4edf-9976-da9d707ba1e9
+		sourceLineageTag: territory_sk
+		summarizeBy: none
+		sourceColumn: territory_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column teryt_code
+		dataType: string
+		sourceProviderType: varchar(12)
+		lineageTag: 45046e88-b4b6-4bed-8ff7-b6d0cd1db6f6
+		sourceLineageTag: teryt_code
+		summarizeBy: none
+		sourceColumn: teryt_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_name
+		dataType: string
+		sourceProviderType: varchar(200)
+		lineageTag: e28d3a6c-be12-478e-8bc3-c275ee098f9c
+		sourceLineageTag: unit_name
+		summarizeBy: none
+		sourceColumn: unit_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column level_name
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: dff9c50f-402a-4836-8060-36d9b7176ca8
+		sourceLineageTag: level_name
+		summarizeBy: none
+		sourceColumn: level_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column voivodeship
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: de46a58e-b513-4a36-946f-4f8e97fa287a
+		sourceLineageTag: voivodeship
+		summarizeBy: none
+		sourceColumn: voivodeship
+
+		annotation SummarizationSetBy = Automatic
+
+	column subregion_code
+		dataType: string
+		sourceProviderType: varchar(7)
+		lineageTag: 93bf095b-f762-438a-a061-ce6935abf317
+		sourceLineageTag: subregion_code
+		summarizeBy: none
+		sourceColumn: subregion_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_type
+		dataType: string
+		sourceProviderType: varchar(30)
+		lineageTag: e4898399-442f-4487-b232-98e54a65e628
+		sourceLineageTag: county_type
+		summarizeBy: none
+		sourceColumn: county_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column agglomeration
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: ed449c20-405b-4ee8-bf0f-8d7cab12bd49
+		sourceLineageTag: agglomeration
+		summarizeBy: none
+		sourceColumn: agglomeration
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_name
+		dataType: string
+		sourceProviderType: varchar(300)
+		lineageTag: c5cc8ed8-6909-4a2f-bbd5-2eb2db1d5532
+		sourceLineageTag: geo_name
+		summarizeBy: none
+		sourceColumn: geo_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 183d731f-23e3-4254-93f7-af1e4c454e04
+		sourceLineageTag: valid_from
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 46680fad-56c1-4d4e-bd2a-af3b63171372
+		sourceLineageTag: valid_to
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_current
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: d6a53e9d-de87-455c-8d9b-c586aee2d09c
+		sourceLineageTag: is_current
+		summarizeBy: none
+		sourceColumn: is_current
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_territory = entity
+		mode: directLake
+		source
+			entityName: dim_territory
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,28 @@
+relationship 4a00946e-05a5-1419-0bf4-a14026d62832
+	fromColumn: fact_market.date_sk
+	toColumn: dim_date.date_sk
+
+relationship a37ae2fc-7b8b-8cf3-5551-40d3d66e6011
+	fromColumn: fact_context.date_sk
+	toColumn: dim_date.date_sk
+
+relationship 25583c6c-047c-0dc9-d912-5684540c4723
+	fromColumn: fact_context.territory_sk
+	toColumn: dim_territory.territory_sk
+
+relationship a70ed132-2595-7a20-04f4-e7fbfe23abbb
+	fromColumn: fact_market.territory_sk
+	toColumn: dim_territory.territory_sk
+
+relationship 8604d906-e6d2-0f06-b60b-f00028649cda
+	fromColumn: fact_market.market_type_sk
+	toColumn: dim_market_type.market_type_sk
+
+relationship 30a29259-fa84-ce36-9a56-f3f8031cff13
+	fromColumn: fact_market.size_range_sk
+	toColumn: dim_size_range.size_range_sk
+
+relationship 552d8d95-1663-42c6-8430-73b02d93ad7b
+	fromColumn: fact_market.reliability_sk
+	toColumn: dim_reliability.reliability_sk
+

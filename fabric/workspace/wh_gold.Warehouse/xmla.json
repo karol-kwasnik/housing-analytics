@@ -13,6 +13,45 @@
     "sourceQueryCulture": "en-US",
     "tables": [
       {
+        "name": "_measures",
+        "sourceLineageTag": "[dbo].[_measures]",
+        "columns": [
+          {
+            "name": "placeholder",
+            "dataType": "boolean",
+            "sourceColumn": "placeholder",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit",
+            "sourceLineageTag": "placeholder",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "_measures",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "dim_date",
         "sourceLineageTag": "[dbo].[dim_date]",
         "columns": [
@@ -114,6 +153,210 @@
             "source": {
               "type": "entity",
               "entityName": "dim_date",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "dim_market_type",
+        "sourceLineageTag": "[dbo].[dim_market_type]",
+        "columns": [
+          {
+            "name": "market_type_sk",
+            "dataType": "int64",
+            "sourceColumn": "market_type_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "market_type_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "market_type",
+            "dataType": "string",
+            "sourceColumn": "market_type",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "market_type",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_market_type",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "dim_reliability",
+        "sourceLineageTag": "[dbo].[dim_reliability]",
+        "columns": [
+          {
+            "name": "reliability_sk",
+            "dataType": "int64",
+            "sourceColumn": "reliability_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "reliability_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "reliability",
+            "dataType": "string",
+            "sourceColumn": "reliability",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "reliability",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "min_transactions",
+            "dataType": "int64",
+            "sourceColumn": "min_transactions",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "min_transactions",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "max_transactions",
+            "dataType": "int64",
+            "sourceColumn": "max_transactions",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "max_transactions",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_reliability",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "dim_size_range",
+        "sourceLineageTag": "[dbo].[dim_size_range]",
+        "columns": [
+          {
+            "name": "size_range_sk",
+            "dataType": "int64",
+            "sourceColumn": "size_range_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "size_range_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "size_range",
+            "dataType": "string",
+            "sourceColumn": "size_range",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "size_range",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "sort_order",
+            "dataType": "int64",
+            "sourceColumn": "sort_order",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "sort_order",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_size_range",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
@@ -310,6 +553,592 @@
             "source": {
               "type": "entity",
               "entityName": "dim_territory",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "fact_context",
+        "sourceLineageTag": "[dbo].[fact_context]",
+        "columns": [
+          {
+            "name": "territory_sk",
+            "dataType": "int64",
+            "sourceColumn": "territory_sk",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "territory_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_sk",
+            "dataType": "int64",
+            "sourceColumn": "date_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "date_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "avg_gross_salary",
+            "dataType": "decimal",
+            "sourceColumn": "avg_gross_salary",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "avg_gross_salary",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "population",
+            "dataType": "int64",
+            "sourceColumn": "population",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "population",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dwellings_completed",
+            "dataType": "int64",
+            "sourceColumn": "dwellings_completed",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "dwellings_completed",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "floor_area_completed",
+            "dataType": "decimal",
+            "sourceColumn": "floor_area_completed",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "floor_area_completed",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dwellings_per_1000",
+            "dataType": "decimal",
+            "sourceColumn": "dwellings_per_1000",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "dwellings_per_1000",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "persons_per_dwelling",
+            "dataType": "decimal",
+            "sourceColumn": "persons_per_dwelling",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "persons_per_dwelling",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "floor_area_per_person",
+            "dataType": "decimal",
+            "sourceColumn": "floor_area_per_person",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "floor_area_per_person",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_context",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "fact_market",
+        "sourceLineageTag": "[dbo].[fact_market]",
+        "columns": [
+          {
+            "name": "territory_sk",
+            "dataType": "int64",
+            "sourceColumn": "territory_sk",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "territory_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_sk",
+            "dataType": "int64",
+            "sourceColumn": "date_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "date_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "market_type_sk",
+            "dataType": "int64",
+            "sourceColumn": "market_type_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "market_type_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "size_range_sk",
+            "dataType": "int64",
+            "sourceColumn": "size_range_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "size_range_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "reliability_sk",
+            "dataType": "int64",
+            "sourceColumn": "reliability_sk",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "reliability_sk",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "median_price_sqm",
+            "dataType": "decimal",
+            "sourceColumn": "median_price_sqm",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "median_price_sqm",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "avg_price_sqm",
+            "dataType": "decimal",
+            "sourceColumn": "avg_price_sqm",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "avg_price_sqm",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "avg_dwelling_price",
+            "dataType": "decimal",
+            "sourceColumn": "avg_dwelling_price",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "avg_dwelling_price",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dwellings_sold",
+            "dataType": "int64",
+            "sourceColumn": "dwellings_sold",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "dwellings_sold",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "floor_area_sold",
+            "dataType": "decimal",
+            "sourceColumn": "floor_area_sold",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "floor_area_sold",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "quality_flag",
+            "dataType": "string",
+            "sourceColumn": "quality_flag",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "quality_flag",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_market",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "param_credit",
+        "sourceLineageTag": "[dbo].[param_credit]",
+        "columns": [
+          {
+            "name": "parameter_name",
+            "dataType": "string",
+            "sourceColumn": "parameter_name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "parameter_name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "parameter_value",
+            "dataType": "decimal",
+            "sourceColumn": "parameter_value",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "parameter_value",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "description",
+            "dataType": "string",
+            "sourceColumn": "description",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "description",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "param_credit",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "param_down_payment",
+        "sourceLineageTag": "[dbo].[param_down_payment]",
+        "columns": [
+          {
+            "name": "down_payment",
+            "dataType": "decimal",
+            "sourceColumn": "down_payment",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "down_payment",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "down_payment_label",
+            "dataType": "string",
+            "sourceColumn": "down_payment_label",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "down_payment_label",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "param_down_payment",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "param_floor_area",
+        "sourceLineageTag": "[dbo].[param_floor_area]",
+        "columns": [
+          {
+            "name": "floor_area",
+            "dataType": "int64",
+            "sourceColumn": "floor_area",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "floor_area",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "param_floor_area",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "param_loan_years",
+        "sourceLineageTag": "[dbo].[param_loan_years]",
+        "columns": [
+          {
+            "name": "loan_years",
+            "dataType": "int64",
+            "sourceColumn": "loan_years",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "loan_years",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "param_loan_years",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "param_rate",
+        "sourceLineageTag": "[dbo].[param_rate]",
+        "columns": [
+          {
+            "name": "rate",
+            "dataType": "decimal",
+            "sourceColumn": "rate",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "rate",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "rate_label",
+            "dataType": "string",
+            "sourceColumn": "rate_label",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "rate_label",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "param_rate",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }

@@ -1,0 +1,36 @@
+table param_down_payment
+	lineageTag: e6d41b9c-8931-44e6-9980-9f1c15d7e894
+	sourceLineageTag: [dbo].[param_down_payment]
+
+	column down_payment
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 4)
+		lineageTag: 301d63a8-c9f6-465f-ade6-a923af88d687
+		sourceLineageTag: down_payment
+		summarizeBy: sum
+		sourceColumn: down_payment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column down_payment_label
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 7580e3c6-f27b-4eaf-95ca-d2f820a3aa23
+		sourceLineageTag: down_payment_label
+		summarizeBy: none
+		sourceColumn: down_payment_label
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_down_payment = entity
+		mode: directLake
+		source
+			entityName: param_down_payment
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

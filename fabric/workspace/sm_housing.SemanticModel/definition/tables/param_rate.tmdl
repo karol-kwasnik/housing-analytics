@@ -1,0 +1,36 @@
+table param_rate
+	lineageTag: ba0966eb-3d35-4ba3-9658-94de92e14769
+	sourceLineageTag: [dbo].[param_rate]
+
+	column rate
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 4)
+		lineageTag: 5c27dd57-882a-4965-aa65-0fcd16bde358
+		sourceLineageTag: rate
+		summarizeBy: sum
+		sourceColumn: rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column rate_label
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 0fd77e69-dafc-4217-bebf-a663aeae2ee6
+		sourceLineageTag: rate_label
+		summarizeBy: none
+		sourceColumn: rate_label
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_rate = entity
+		mode: directLake
+		source
+			entityName: param_rate
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

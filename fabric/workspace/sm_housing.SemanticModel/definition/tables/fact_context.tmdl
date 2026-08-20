@@ -1,0 +1,128 @@
+table fact_context
+	lineageTag: 628b8aca-bdbd-48a9-a2de-427bf2329273
+	sourceLineageTag: [dbo].[fact_context]
+
+	column territory_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 1670dcfb-6360-4a0a-897f-62cc3b74a5f5
+		sourceLineageTag: territory_sk
+		summarizeBy: none
+		sourceColumn: territory_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6b4719ea-480b-404d-bceb-a5e4a1be6755
+		sourceLineageTag: date_sk
+		summarizeBy: none
+		sourceColumn: date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_gross_salary
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 3067957b-f943-4058-b3d4-bcc4c56a77da
+		sourceLineageTag: avg_gross_salary
+		summarizeBy: sum
+		sourceColumn: avg_gross_salary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column population
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 911f3181-7d53-49b3-a091-a3b62cfccc9b
+		sourceLineageTag: population
+		summarizeBy: sum
+		sourceColumn: population
+
+		annotation SummarizationSetBy = Automatic
+
+	column dwellings_completed
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e0f6ad97-d753-483f-a4d1-040a956b78a5
+		sourceLineageTag: dwellings_completed
+		summarizeBy: sum
+		sourceColumn: dwellings_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column floor_area_completed
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 2)
+		lineageTag: 33ccf529-1003-4f79-af8f-1b0f6eeee3bb
+		sourceLineageTag: floor_area_completed
+		summarizeBy: sum
+		sourceColumn: floor_area_completed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column dwellings_per_1000
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 0b99b73a-16c2-4985-8340-74eaab51e685
+		sourceLineageTag: dwellings_per_1000
+		summarizeBy: sum
+		sourceColumn: dwellings_per_1000
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column persons_per_dwelling
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: a658b645-757a-4606-833b-d354fb3c39eb
+		sourceLineageTag: persons_per_dwelling
+		summarizeBy: sum
+		sourceColumn: persons_per_dwelling
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column floor_area_per_person
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 468933b6-3274-4e23-8b94-c3f244cd354a
+		sourceLineageTag: floor_area_per_person
+		summarizeBy: sum
+		sourceColumn: floor_area_per_person
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition fact_context = entity
+		mode: directLake
+		source
+			entityName: fact_context
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

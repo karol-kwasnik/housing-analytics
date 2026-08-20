@@ -1,0 +1,54 @@
+table dim_size_range
+	lineageTag: 0f15c043-715c-46b6-99d5-712d60dc5c67
+	sourceLineageTag: [dbo].[dim_size_range]
+
+	column size_range_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2054830f-60f2-404b-a6fb-2373546da848
+		sourceLineageTag: size_range_sk
+		summarizeBy: none
+		sourceColumn: size_range_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column size_range
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 03fd78cf-6ed9-4952-a420-f6dcb78b8619
+		sourceLineageTag: size_range
+		summarizeBy: none
+		sourceColumn: size_range
+		sortByColumn: sort_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort_order
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a4669662-aedf-48ac-8202-0e64a42850ce
+		sourceLineageTag: sort_order
+		summarizeBy: none
+		sourceColumn: sort_order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_size_range = entity
+		mode: directLake
+		source
+			entityName: dim_size_range
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
