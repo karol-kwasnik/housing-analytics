@@ -76,6 +76,14 @@ RETURN
 
 Dwellings Sold = SUM ( fact_market[dwellings_sold] )
 
+Dwellings Sold PY =
+VAR PriorYear = [Selected Year] - 1
+RETURN
+    CALCULATE ( [Dwellings Sold], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
+
+Dwellings Sold YoY % =
+DIVIDE ( [Dwellings Sold] - [Dwellings Sold PY], [Dwellings Sold PY] )
+
 Floor Area Sold = SUM ( fact_market[floor_area_sold] )
 
 Share of National Market % =

@@ -124,6 +124,20 @@ table _measures
 		displayFolder: Market
 		lineageTag: 4c43e784-72e5-5355-8b81-0386c5835f2c
 
+	measure 'Dwellings Sold PY' =
+			
+			VAR PriorYear = [Selected Year] - 1
+			RETURN
+			    CALCULATE ( [Dwellings Sold], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
+		formatString: #,##0
+		displayFolder: Market
+		lineageTag: 3ec77886-0837-534b-984c-0af48473ac70
+
+	measure 'Dwellings Sold YoY %' = DIVIDE ( [Dwellings Sold] - [Dwellings Sold PY], [Dwellings Sold PY] )
+		formatString: 0.0%
+		displayFolder: Market
+		lineageTag: fe2c103a-3fc1-5f0a-8e4d-00dcbc42b3f3
+
 	measure 'Floor Area Sold' = SUM ( fact_market[floor_area_sold] )
 		formatString: #,##0
 		displayFolder: Market
