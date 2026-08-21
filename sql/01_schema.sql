@@ -50,14 +50,12 @@ CREATE TABLE ref.ingestion_log (
 CREATE INDEX ix_ingestion_log_batch ON ref.ingestion_log (batch_id);
 
 CREATE TABLE ref.county_classification (
-    teryt_code    VARCHAR(12)   NOT NULL PRIMARY KEY,
-    name          NVARCHAR(200) NOT NULL,
-    voivodeship   NVARCHAR(100) NULL,
-    county_type   VARCHAR(30)   NULL,
-    agglomeration NVARCHAR(100) NULL,
-    geo_name      NVARCHAR(300) NULL,
-    latitude      DECIMAL(9,6)  NULL,
-    longitude     DECIMAL(9,6)  NULL
+    teryt_code     VARCHAR(12)   NOT NULL PRIMARY KEY,
+    name           NVARCHAR(200) NOT NULL,
+    voivodeship    NVARCHAR(100) NULL,
+    subregion_code VARCHAR(7)    NULL,
+    subregion_name NVARCHAR(200) NULL,
+    county_type    VARCHAR(30)   NULL
 );
 
 CREATE TABLE ref.credit_parameter (
