@@ -52,6 +52,44 @@
         ]
       },
       {
+        "name": "axis_rate",
+        "sourceLineageTag": "[dbo].[axis_rate]",
+        "columns": [
+          {
+            "name": "rate",
+            "dataType": "decimal",
+            "sourceColumn": "rate",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "rate",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "axis_rate",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "dim_date",
         "sourceLineageTag": "[dbo].[dim_date]",
         "columns": [
@@ -473,34 +511,6 @@
             ]
           },
           {
-            "name": "agglomeration",
-            "dataType": "string",
-            "sourceColumn": "agglomeration",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "agglomeration",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "geo_name",
-            "dataType": "string",
-            "sourceColumn": "geo_name",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "geo_name",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
             "name": "valid_from",
             "dataType": "dateTime",
             "sourceColumn": "valid_from",
@@ -537,6 +547,20 @@
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
             "sourceProviderType": "bit",
             "sourceLineageTag": "is_current",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "subregion_name",
+            "dataType": "string",
+            "sourceColumn": "subregion_name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "subregion_name",
             "summarizeBy": "none",
             "annotations": [
               {
