@@ -81,6 +81,8 @@
           "secureOutput": false
         },
         "name": "RefreshModel",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "LoadGold",
