@@ -76,23 +76,13 @@ table dim_territory
 
 		annotation SummarizationSetBy = Automatic
 
-	column agglomeration
+	column subregion_name
 		dataType: string
-		sourceProviderType: varchar(100)
-		lineageTag: ed449c20-405b-4ee8-bf0f-8d7cab12bd49
-		sourceLineageTag: agglomeration
+		sourceProviderType: varchar(200)
+		lineageTag: d403e694-da1e-53ca-8b60-c8387d7c4cfb
+		sourceLineageTag: subregion_name
 		summarizeBy: none
-		sourceColumn: agglomeration
-
-		annotation SummarizationSetBy = Automatic
-
-	column geo_name
-		dataType: string
-		sourceProviderType: varchar(300)
-		lineageTag: c5cc8ed8-6909-4a2f-bbd5-2eb2db1d5532
-		sourceLineageTag: geo_name
-		summarizeBy: none
-		sourceColumn: geo_name
+		sourceColumn: subregion_name
 
 		annotation SummarizationSetBy = Automatic
 
