@@ -1,0 +1,24 @@
+table axis_rate
+	lineageTag: cfdd7e5f-8b96-52ca-bc49-c3640dc8110b
+	sourceLineageTag: [dbo].[axis_rate]
+
+	column rate
+		dataType: decimal
+		formatString: 0.00%
+		sourceProviderType: decimal(6, 4)
+		lineageTag: b075ed32-eff0-5357-9f71-e0e0ec9a5e36
+		sourceLineageTag: rate
+		summarizeBy: none
+		sourceColumn: rate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition axis_rate = entity
+		mode: directLake
+		source
+			entityName: axis_rate
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

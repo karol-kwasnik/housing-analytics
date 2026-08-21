@@ -25,5 +25,6 @@ ref table param_rate
 ref table param_down_payment
 ref table param_loan_years
 ref table param_floor_area
+ref table axis_rate
 ref table _measures
 
