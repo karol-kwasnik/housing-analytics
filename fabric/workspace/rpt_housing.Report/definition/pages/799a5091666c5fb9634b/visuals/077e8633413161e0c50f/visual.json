@@ -5,7 +5,7 @@
     "x": 546,
     "y": 444,
     "z": 3003,
-    "height": 252,
+    "height": 256,
     "width": 345,
     "tabOrder": 3003
   },
@@ -27,7 +27,7 @@
                 }
               },
               "queryRef": "dim_territory.unit_name",
-              "nativeQueryRef": "unit_name"
+              "nativeQueryRef": "Powiat"
             },
             {
               "field": {
@@ -41,21 +41,7 @@
                 }
               },
               "queryRef": "_measures.Median Price sqm",
-              "nativeQueryRef": "Median Price sqm"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_measures"
-                    }
-                  },
-                  "Property": "Dwellings Sold"
-                }
-              },
-              "queryRef": "_measures.Dwellings Sold",
-              "nativeQueryRef": "Dwellings Sold"
+              "nativeQueryRef": "Mediana zł/m²"
             }
           ]
         }
@@ -79,6 +65,19 @@
       }
     },
     "objects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "total": [
         {
           "properties": {
@@ -193,7 +192,7 @@
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "5D"
+                  "Value": "2D"
                 }
               }
             },
@@ -329,6 +328,20 @@
         },
         {
           "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Consolas'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Median Price sqm"
+          }
+        },
+        {
+          "properties": {
             "icon": {
               "kind": "Icon",
               "layout": {
@@ -390,7 +403,7 @@
                 }
               }
             ],
-            "metadata": "_measures.Dwellings Sold"
+            "metadata": "_measures.Median Price sqm"
           }
         }
       ],
@@ -441,7 +454,7 @@
               "hideText": {
                 "expr": {
                   "Literal": {
-                    "Value": "true"
+                    "Value": "false"
                   }
                 }
               }
@@ -458,7 +471,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "150D"
+                  "Value": "178D"
                 }
               }
             }
@@ -472,27 +485,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "92D"
+                  "Value": "135D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "_measures.Median Price sqm"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "74D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_measures.Dwellings Sold"
           }
         }
       ]
@@ -676,14 +675,14 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "10D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "8D"
                 }
               }
             },
@@ -709,7 +708,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "3d6e06dcd1e847a7bcbd",
+        "name": "01b17de94ec04a419a50",
         "field": {
           "Measure": {
             "Expression": {
@@ -762,7 +761,7 @@
         "howCreated": "User"
       },
       {
-        "name": "f758d3d50564461da6cc",
+        "name": "69513cc482a34a7592c4",
         "type": "VisualTopN",
         "filter": {
           "Version": 2,

@@ -3,9 +3,9 @@
   "name": "81ad74cf2bc6429e9e71",
   "position": {
     "x": 32,
-    "y": 102,
+    "y": 100,
     "z": 3000,
-    "height": 104,
+    "height": 122,
     "width": 1216,
     "tabOrder": 3000
   },
@@ -277,14 +277,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "26D"
+                  "Value": "24D"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                  "Value": "'Consolas'"
                 }
               }
             },
@@ -317,13 +317,6 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
-                }
-              }
-            },
-            "labelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "0L"
                 }
               }
             }
@@ -378,7 +371,7 @@
             "textWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -393,6 +386,76 @@
           "selector": {
             "id": "default"
           }
+        },
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Mediana ceny m²'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.National Median Price sqm"
+          }
+        },
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Transakcje'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Dwellings Sold"
+          }
+        },
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Wynagrodzenie brutto'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Gross Salary"
+          }
+        },
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'m² za pensję'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Sqm per Monthly Salary"
+          }
+        },
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Kompletność danych'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Completeness %"
+          }
         }
       ],
       "referenceLabelTitle": [
@@ -401,32 +464,18 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
-            },
-            "titleFontSize": {
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
-                }
-              }
-            },
-            "titleFontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#6B7280'"
-                    }
-                  }
-                }
-              }
-            },
-            "titleFontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                  "Value": "false"
                 }
               }
             }
@@ -449,7 +498,7 @@
             "valueFontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "11D"
                 }
               }
             },
@@ -467,7 +516,7 @@
             "valueFontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                  "Value": "'Consolas'"
                 }
               }
             },
@@ -566,6 +615,19 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
