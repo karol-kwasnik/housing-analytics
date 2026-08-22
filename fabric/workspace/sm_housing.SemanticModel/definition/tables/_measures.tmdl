@@ -3,10 +3,12 @@ table _measures
 	sourceLineageTag: [dbo].[_measures]
 
 	measure 'Median Price sqm' =
-			
+
 			IF (
 			    HASONEVALUE ( dim_market_type[market_type] )
-			        && HASONEVALUE ( dim_size_range[size_range] ),
+			        && HASONEVALUE ( dim_size_range[size_range] )
+			        && HASONEVALUE ( dim_date[year] )
+			        && HASONEVALUE ( dim_territory[teryt_code] ),
 			    MAX ( fact_market[median_price_sqm] )
 			)
 		formatString: #,##0 "zł"
@@ -22,11 +24,26 @@ table _measures
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
+	measure 'Price sqm' =
+
+			IF (
+			    HASONEVALUE ( dim_territory[teryt_code] ),
+			    [Median Price sqm],
+			    [National Median Price sqm]
+			)
+		formatString: #,##0 "zł"
+		displayFolder: Prices
+		lineageTag: 7c1e4a92-5b03-5d18-9e44-0a6f2d3b8e57
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
 	measure 'Avg Price sqm' =
-			
+
 			IF (
 			    HASONEVALUE ( dim_market_type[market_type] )
-			        && HASONEVALUE ( dim_size_range[size_range] ),
+			        && HASONEVALUE ( dim_size_range[size_range] )
+			        && HASONEVALUE ( dim_date[year] )
+			        && HASONEVALUE ( dim_territory[teryt_code] ),
 			    MAX ( fact_market[avg_price_sqm] )
 			)
 		formatString: #,##0 "zł"
@@ -229,12 +246,12 @@ table _measures
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Sqm per Monthly Salary' = DIVIDE ( [Net Salary], [Median Price sqm] )
+	measure 'Sqm per Monthly Salary' = DIVIDE ( [Net Salary], [Price sqm] )
 		formatString: 0.00
 		displayFolder: Affordability
 		lineageTag: e6f06987-d0b4-5105-aa50-a6ce424978ce
 
-	measure 'Years of Work' = DIVIDE ( [Median Price sqm] * [Floor Area Value], [Net Salary] * 12 )
+	measure 'Years of Work' = DIVIDE ( [Price sqm] * [Floor Area Value], [Net Salary] * 12 )
 		formatString: 0.0
 		displayFolder: Affordability
 		lineageTag: 77bedf40-07cf-55ab-81fe-eebd543b68c7
@@ -266,10 +283,10 @@ table _measures
 	measure 'Price vs Salary Growth Ratio' =
 			
 			VAR PriceBase =
-			    CALCULATE ( [Median Price sqm], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
+			    CALCULATE ( [Price sqm], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
 			VAR SalaryBase =
 			    CALCULATE ( [Gross Salary], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
-			VAR PriceGrowth = DIVIDE ( [Median Price sqm], PriceBase )
+			VAR PriceGrowth = DIVIDE ( [Price sqm], PriceBase )
 			VAR SalaryGrowth = DIVIDE ( [Gross Salary], SalaryBase )
 			RETURN
 			    DIVIDE ( PriceGrowth, SalaryGrowth )
@@ -297,7 +314,7 @@ table _measures
 		displayFolder: Simulator
 		lineageTag: 7190fcdc-d7f2-593a-a1bb-ec99ecd9f470
 
-	measure 'Property Price' = [Median Price sqm] * [Floor Area Value]
+	measure 'Property Price' = [Price sqm] * [Floor Area Value]
 		formatString: #,##0 "zł"
 		displayFolder: Simulator
 		lineageTag: 0e7741af-6b77-5956-b4f4-bf4d4a8f8096

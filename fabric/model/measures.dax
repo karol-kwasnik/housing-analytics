@@ -1,19 +1,29 @@
--- 01 Prices ------------------------------------------------------------
+-- 01 Prices ------------------------------------------------------
 
 Median Price sqm =
 IF (
     HASONEVALUE ( dim_market_type[market_type] )
-        && HASONEVALUE ( dim_size_range[size_range] ),
+        && HASONEVALUE ( dim_size_range[size_range] )
+        && HASONEVALUE ( dim_date[year] )
+        && HASONEVALUE ( dim_territory[teryt_code] ),
     MAX ( fact_market[median_price_sqm] )
 )
 
-National Median Price sqm =
-MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Median Price sqm] )
+National Median Price sqm = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Median Price sqm] )
+
+Price sqm =
+IF (
+    HASONEVALUE ( dim_territory[teryt_code] ),
+    [Median Price sqm],
+    [National Median Price sqm]
+)
 
 Avg Price sqm =
 IF (
     HASONEVALUE ( dim_market_type[market_type] )
-        && HASONEVALUE ( dim_size_range[size_range] ),
+        && HASONEVALUE ( dim_size_range[size_range] )
+        && HASONEVALUE ( dim_date[year] )
+        && HASONEVALUE ( dim_territory[teryt_code] ),
     MAX ( fact_market[avg_price_sqm] )
 )
 
@@ -37,8 +47,7 @@ RETURN
         dim_date[year] = PriorYear
     )
 
-Price sqm YoY % =
-DIVIDE ( [Median Price sqm] - [Median Price sqm PY], [Median Price sqm PY] )
+Price sqm YoY % = DIVIDE ( [Median Price sqm] - [Median Price sqm PY], [Median Price sqm PY] )
 
 National Price sqm YoY % =
 DIVIDE (
@@ -72,7 +81,7 @@ VAR SecondaryPrice =
 RETURN
     DIVIDE ( PrimaryPrice - SecondaryPrice, SecondaryPrice )
 
--- 02 Market ------------------------------------------------------------
+-- 02 Market ------------------------------------------------------
 
 Dwellings Sold = SUM ( fact_market[dwellings_sold] )
 
@@ -81,8 +90,7 @@ VAR PriorYear = [Selected Year] - 1
 RETURN
     CALCULATE ( [Dwellings Sold], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
 
-Dwellings Sold YoY % =
-DIVIDE ( [Dwellings Sold] - [Dwellings Sold PY], [Dwellings Sold PY] )
+Dwellings Sold YoY % = DIVIDE ( [Dwellings Sold] - [Dwellings Sold PY], [Dwellings Sold PY] )
 
 Floor Area Sold = SUM ( fact_market[floor_area_sold] )
 
@@ -110,16 +118,13 @@ Dwellings Completed = SUM ( fact_context[dwellings_completed] )
 
 Dwellings per 1000 = AVERAGE ( fact_context[dwellings_per_1000] )
 
--- 03 Affordability -----------------------------------------------------
+-- 03 Affordability -----------------------------------------------
 
-Net to Gross =
-CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "net_to_gross" )
+Net to Gross = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "net_to_gross" )
 
-Bank Margin =
-CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "bank_margin" )
+Bank Margin = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "bank_margin" )
 
-Min Down Payment =
-CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "min_down_payment" )
+Min Down Payment = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "min_down_payment" )
 
 Gross Salary = AVERAGE ( fact_context[avg_gross_salary] )
 
@@ -132,10 +137,9 @@ Salary YoY % = DIVIDE ( [Gross Salary] - [Gross Salary PY], [Gross Salary PY] )
 
 Net Salary = [Gross Salary] * [Net to Gross]
 
-Sqm per Monthly Salary = DIVIDE ( [Net Salary], [Median Price sqm] )
+Sqm per Monthly Salary = DIVIDE ( [Net Salary], [Price sqm] )
 
-Years of Work =
-DIVIDE ( [Median Price sqm] * [Floor Area Value], [Net Salary] * 12 )
+Years of Work = DIVIDE ( [Price sqm] * [Floor Area Value], [Net Salary] * 12 )
 
 Affordability Index =
 DIVIDE (
@@ -143,23 +147,21 @@ DIVIDE (
     CALCULATE ( [Sqm per Monthly Salary], REMOVEFILTERS ( dim_territory ) )
 ) * 100
 
-Median Salary Line =
-MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Gross Salary] )
+Median Salary Line = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Gross Salary] )
 
-Median Price Line =
-MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Median Price sqm] )
+Median Price Line = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Median Price sqm] )
 
 Price vs Salary Growth Ratio =
 VAR PriceBase =
-    CALCULATE ( [Median Price sqm], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
+    CALCULATE ( [Price sqm], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
 VAR SalaryBase =
     CALCULATE ( [Gross Salary], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
-VAR PriceGrowth = DIVIDE ( [Median Price sqm], PriceBase )
+VAR PriceGrowth = DIVIDE ( [Price sqm], PriceBase )
 VAR SalaryGrowth = DIVIDE ( [Gross Salary], SalaryBase )
 RETURN
     DIVIDE ( PriceGrowth, SalaryGrowth )
 
--- 04 Simulator ---------------------------------------------------------
+-- 04 Simulator ---------------------------------------------------
 
 Rate Value = SELECTEDVALUE ( param_rate[rate], 0.0575 )
 
@@ -169,7 +171,7 @@ Loan Years Value = SELECTEDVALUE ( param_loan_years[loan_years], 25 )
 
 Floor Area Value = SELECTEDVALUE ( param_floor_area[floor_area], 50 )
 
-Property Price = [Median Price sqm] * [Floor Area Value]
+Property Price = [Price sqm] * [Floor Area Value]
 
 Loan Amount = [Property Price] * ( 1 - [Down Payment Value] )
 
@@ -180,10 +182,7 @@ VAR Months = [Loan Years Value] * 12
 RETURN
     IF (
         MonthlyRate > 0,
-        DIVIDE (
-            Principal * MonthlyRate,
-            1 - POWER ( 1 + MonthlyRate, - Months )
-        ),
+        DIVIDE ( Principal * MonthlyRate, 1 - POWER ( 1 + MonthlyRate, - Months ) ),
         DIVIDE ( Principal, Months )
     )
 
@@ -194,10 +193,7 @@ VAR Months = [Loan Years Value] * 12
 RETURN
     IF (
         MonthlyRate > 0,
-        DIVIDE (
-            Principal * MonthlyRate,
-            1 - POWER ( 1 + MonthlyRate, - Months )
-        ),
+        DIVIDE ( Principal * MonthlyRate, 1 - POWER ( 1 + MonthlyRate, - Months ) ),
         DIVIDE ( Principal, Months )
     )
 
@@ -211,10 +207,9 @@ SWITCH (
     "#3BA99C"
 )
 
--- 05 Quality -----------------------------------------------------------
+-- 05 Quality -----------------------------------------------------
 
-Completeness % =
-DIVIDE ( COUNT ( fact_market[median_price_sqm] ), COUNTROWS ( fact_market ) )
+Completeness % = DIVIDE ( COUNT ( fact_market[median_price_sqm] ), COUNTROWS ( fact_market ) )
 
 Counties with Gaps =
 COUNTROWS (
@@ -224,8 +219,7 @@ COUNTROWS (
     )
 )
 
-Small Sample Flag =
-IF ( NOT ISBLANK ( [Dwellings Sold] ) && [Dwellings Sold] < 10, 1, 0 )
+Small Sample Flag = IF ( NOT ISBLANK ( [Dwellings Sold] ) && [Dwellings Sold] < 10, 1, 0 )
 
 Reliability Label = SELECTEDVALUE ( dim_reliability[reliability] )
 
