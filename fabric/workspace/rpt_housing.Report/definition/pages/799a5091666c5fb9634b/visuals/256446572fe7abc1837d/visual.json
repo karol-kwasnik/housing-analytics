@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "256446572fe7abc1837d",
+  "position": {
+    "x": 9.9947943779281623,
+    "y": 0,
+    "z": 0,
+    "height": 56.637168141592923,
+    "width": 342.4882873503384,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Przegląd krajowy",
+                    "textStyle": {
+                      "fontFamily": "Georgia",
+                      "fontSize": "28pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
