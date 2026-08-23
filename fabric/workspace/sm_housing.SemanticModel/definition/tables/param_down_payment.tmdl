@@ -22,6 +22,9 @@ table param_down_payment
 		sourceLineageTag: down_payment_label
 		summarizeBy: none
 		sourceColumn: down_payment_label
+		sortByColumn: down_payment
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 

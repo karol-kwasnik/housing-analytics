@@ -298,5 +298,12 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "c4000000000000000111",
+      "target": "c4000000000000000031",
+      "type": "NoFilter"
+    }
+  ]
 }

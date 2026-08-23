@@ -4,7 +4,7 @@ table param_rate
 
 	column rate
 		dataType: decimal
-		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		formatString: 0.00%
 		sourceProviderType: decimal(6, 4)
 		lineageTag: 5c27dd57-882a-4965-aa65-0fcd16bde358
 		sourceLineageTag: rate
@@ -13,8 +13,6 @@ table param_rate
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
-
 	column rate_label
 		dataType: string
 		sourceProviderType: varchar(10)
@@ -22,6 +20,9 @@ table param_rate
 		sourceLineageTag: rate_label
 		summarizeBy: none
 		sourceColumn: rate_label
+		sortByColumn: rate
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
