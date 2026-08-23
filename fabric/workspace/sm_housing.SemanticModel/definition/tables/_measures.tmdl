@@ -24,6 +24,15 @@ table _measures
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
+	measure 'Mediana ogólnokrajowa m²' =
+			
+			CALCULATE ( [Mediana krajowa m²], REMOVEFILTERS ( dim_territory ) )
+		formatString: #,##0 "zł"
+		displayFolder: 01 Ceny
+		lineageTag: 7f3c1a92-5e48-4b71-9c02-3ad6e1b4c8f0
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
 	measure 'Cena m²' =
 
 			IF (
@@ -174,7 +183,7 @@ table _measures
 			
 			VAR Ranking =
 			    RANKX (
-			        ALLSELECTED ( dim_territory[teryt_code] ),
+			        ALL ( dim_territory[teryt_code] ),
 			        CALCULATE ( [Mediana ceny m²] ),
 			        ,
 			        DESC,
