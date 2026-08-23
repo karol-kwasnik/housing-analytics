@@ -3,9 +3,9 @@
   "name": "2eac4b5125a8fd0981da",
   "position": {
     "x": 32,
-    "y": 238,
+    "y": 250,
     "z": 3001,
-    "height": 462,
+    "height": 450,
     "width": 498,
     "tabOrder": 3001
   },
@@ -42,11 +42,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "National Median Price sqm"
+                  "Property": "Mediana krajowa m²"
                 }
               },
-              "queryRef": "_measures.National Median Price sqm",
-              "nativeQueryRef": "National Median Price sqm"
+              "queryRef": "_measures.Mediana krajowa m²",
+              "nativeQueryRef": "Mediana krajowa m²"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "_measures"
                   }
                 },
-                "Property": "National Median Price sqm"
+                "Property": "Mediana krajowa m²"
               }
             },
             "direction": "Descending"
@@ -86,15 +86,22 @@
                               "Entity": "_measures"
                             }
                           },
-                          "Property": "National Median Price sqm"
+                          "Property": "Mediana krajowa m²"
                         }
                       },
                       "FillRule": {
-                        "linearGradient2": {
+                        "linearGradient3": {
                           "min": {
                             "color": {
                               "Literal": {
                                 "Value": "'#3BA99C'"
+                              }
+                            }
+                          },
+                          "mid": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#E8C547'"
                               }
                             }
                           },
@@ -508,7 +515,7 @@
                 "Entity": "_measures"
               }
             },
-            "Property": "National Median Price sqm"
+            "Property": "Mediana krajowa m²"
           }
         },
         "type": "Advanced"

@@ -3,9 +3,9 @@
   "name": "f819f4f268c551638912",
   "position": {
     "x": 1012,
-    "y": 100,
+    "y": 98,
     "z": 3004,
-    "height": 118,
+    "height": 132,
     "width": 236,
     "tabOrder": 3004
   },
@@ -23,11 +23,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Completeness %"
+                  "Property": "Kompletność %"
                 }
               },
-              "queryRef": "_measures.Completeness %",
-              "nativeQueryRef": "Completeness %"
+              "queryRef": "_measures.Kompletność %",
+              "nativeQueryRef": "Kompletność %"
             }
           ]
         }
@@ -53,7 +53,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "22D"
                 }
               }
             },
@@ -182,7 +182,7 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Counties with Gaps"
+                  "Property": "Powiaty z brakami"
                 }
               }
             }
@@ -195,7 +195,7 @@
                 }
               }
             ],
-            "metadata": "_measures.Completeness %",
+            "metadata": "_measures.Kompletność %",
             "id": "field-a97c378d-36d3-5988-9277-a189dba37a6d",
             "order": 0
           }
@@ -355,6 +355,73 @@
                   "Value": "'left'"
                 }
               }
+            },
+            "customizeLines": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridlineWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "topOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "leftOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           },
           "selector": {
@@ -373,9 +440,50 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
         }
       ],
       "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
         {
           "properties": {
             "show": {

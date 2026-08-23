@@ -3,9 +3,9 @@
   "name": "3ce409132365554382e8",
   "position": {
     "x": 767,
-    "y": 100,
+    "y": 98,
     "z": 3003,
-    "height": 118,
+    "height": 132,
     "width": 236,
     "tabOrder": 3003
   },
@@ -23,11 +23,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Sqm per Monthly Salary"
+                  "Property": "m² za pensję"
                 }
               },
-              "queryRef": "_measures.Sqm per Monthly Salary",
-              "nativeQueryRef": "Sqm per Monthly Salary"
+              "queryRef": "_measures.m² za pensję",
+              "nativeQueryRef": "m² za pensję"
             }
           ]
         }
@@ -53,7 +53,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "22D"
                 }
               }
             },
@@ -182,7 +182,7 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Years of Work"
+                  "Property": "Lata pracy"
                 }
               }
             }
@@ -195,7 +195,7 @@
                 }
               }
             ],
-            "metadata": "_measures.Sqm per Monthly Salary",
+            "metadata": "_measures.m² za pensję",
             "id": "field-77bedf40-07cf-55ab-81fe-eebd543b68c7",
             "order": 0
           }
@@ -355,6 +355,73 @@
                   "Value": "'left'"
                 }
               }
+            },
+            "customizeLines": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridlineWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "topOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "leftOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           },
           "selector": {
@@ -373,9 +440,50 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
         }
       ],
       "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
         {
           "properties": {
             "show": {

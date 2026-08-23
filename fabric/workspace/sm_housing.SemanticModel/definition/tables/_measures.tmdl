@@ -2,7 +2,7 @@ table _measures
 	lineageTag: f6e1c66f-d660-4ac9-a573-84e1202ab589
 	sourceLineageTag: [dbo].[_measures]
 
-	measure 'Median Price sqm' =
+	measure 'Mediana ceny m²' =
 
 			IF (
 			    HASONEVALUE ( dim_market_type[market_type] )
@@ -12,32 +12,32 @@ table _measures
 			    MAX ( fact_market[median_price_sqm] )
 			)
 		formatString: #,##0 "zł"
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 3cfeaebe-9d25-5cb6-b21f-f1ff099e5f9c
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'National Median Price sqm' = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Median Price sqm] )
+	measure 'Mediana krajowa m²' = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Mediana ceny m²] )
 		formatString: #,##0 "zł"
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 14a6238b-34f8-5201-ae63-9bcdbbad618d
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Price sqm' =
+	measure 'Cena m²' =
 
 			IF (
 			    HASONEVALUE ( dim_territory[teryt_code] ),
-			    [Median Price sqm],
-			    [National Median Price sqm]
+			    [Mediana ceny m²],
+			    [Mediana krajowa m²]
 			)
 		formatString: #,##0 "zł"
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 7c1e4a92-5b03-5d18-9e44-0a6f2d3b8e57
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Avg Price sqm' =
+	measure 'Średnia cena m²' =
 
 			IF (
 			    HASONEVALUE ( dim_market_type[market_type] )
@@ -47,76 +47,76 @@ table _measures
 			    MAX ( fact_market[avg_price_sqm] )
 			)
 		formatString: #,##0 "zł"
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 04f4a0d9-dcc2-5c4f-8205-032774417b3d
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Selected Year' = SELECTEDVALUE ( dim_date[year] )
+	measure 'Wybrany rok' = SELECTEDVALUE ( dim_date[year] )
 		formatString: 0
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 63956c90-ba9b-512e-92fc-833842efe24d
 
-	measure 'Median Price sqm PY' =
+	measure 'Mediana m² rok wcześniej' =
 			
-			VAR PriorYear = [Selected Year] - 1
+			VAR PriorYear = [Wybrany rok] - 1
 			RETURN
 			    CALCULATE (
-			        [Median Price sqm],
+			        [Mediana ceny m²],
 			        REMOVEFILTERS ( dim_date ),
 			        dim_date[year] = PriorYear
 			    )
 		formatString: #,##0 "zł"
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 59fa031e-7831-5f0a-a5b0-80b2a2e7e31b
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'National Median Price sqm PY' =
+	measure 'Mediana krajowa m² rok wcześniej' =
 			
-			VAR PriorYear = [Selected Year] - 1
+			VAR PriorYear = [Wybrany rok] - 1
 			RETURN
 			    CALCULATE (
-			        [National Median Price sqm],
+			        [Mediana krajowa m²],
 			        REMOVEFILTERS ( dim_date ),
 			        dim_date[year] = PriorYear
 			    )
 		formatString: #,##0 "zł"
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: cd04e343-042c-57dc-b67f-32ec1e3ce249
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Price sqm YoY %' = DIVIDE ( [Median Price sqm] - [Median Price sqm PY], [Median Price sqm PY] )
+	measure 'Zmiana ceny r/r %' = DIVIDE ( [Mediana ceny m²] - [Mediana m² rok wcześniej], [Mediana m² rok wcześniej] )
 		formatString: 0.0%
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 1479328d-5ba4-5b82-b8b4-3822e93bf74b
 
-	measure 'National Price sqm YoY %' =
+	measure 'Zmiana ceny krajowej r/r %' =
 			
 			DIVIDE (
-			    [National Median Price sqm] - [National Median Price sqm PY],
-			    [National Median Price sqm PY]
+			    [Mediana krajowa m²] - [Mediana krajowa m² rok wcześniej],
+			    [Mediana krajowa m² rok wcześniej]
 			)
 		formatString: 0.0%
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 9eeec1f3-b7ea-559c-b5aa-cb5c13a11839
 
-	measure 'Price sqm Change since 2010 %' =
+	measure 'Zmiana ceny od 2010 %' =
 			
 			VAR BasePrice =
 			    CALCULATE (
-			        [National Median Price sqm],
+			        [Mediana krajowa m²],
 			        REMOVEFILTERS ( dim_date ),
 			        dim_date[year] = 2010
 			    )
 			RETURN
-			    DIVIDE ( [National Median Price sqm] - BasePrice, BasePrice )
+			    DIVIDE ( [Mediana krajowa m²] - BasePrice, BasePrice )
 		formatString: 0.0%
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: b80231e6-9859-5d9d-ba33-07e4f2e21e66
 
-	measure 'Primary Market Premium %' =
+	measure 'Premia rynku pierwotnego %' =
 			
 			VAR PrimaryPrice =
 			    CALCULATE (
@@ -133,206 +133,206 @@ table _measures
 			RETURN
 			    DIVIDE ( PrimaryPrice - SecondaryPrice, SecondaryPrice )
 		formatString: 0.0%
-		displayFolder: Prices
+		displayFolder: 01 Ceny
 		lineageTag: 3da97225-07a7-512a-b4c1-f8845dafd6c2
 
-	measure 'Dwellings Sold' = SUM ( fact_market[dwellings_sold] )
+	measure 'Transakcje' = SUM ( fact_market[dwellings_sold] )
 		formatString: #,##0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: 4c43e784-72e5-5355-8b81-0386c5835f2c
 
-	measure 'Dwellings Sold PY' =
+	measure 'Transakcje rok wcześniej' =
 			
-			VAR PriorYear = [Selected Year] - 1
+			VAR PriorYear = [Wybrany rok] - 1
 			RETURN
-			    CALCULATE ( [Dwellings Sold], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
+			    CALCULATE ( [Transakcje], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
 		formatString: #,##0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: 3ec77886-0837-534b-984c-0af48473ac70
 
-	measure 'Dwellings Sold YoY %' = DIVIDE ( [Dwellings Sold] - [Dwellings Sold PY], [Dwellings Sold PY] )
+	measure 'Zmiana transakcji r/r %' = DIVIDE ( [Transakcje] - [Transakcje rok wcześniej], [Transakcje rok wcześniej] )
 		formatString: 0.0%
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: fe2c103a-3fc1-5f0a-8e4d-00dcbc42b3f3
 
-	measure 'Floor Area Sold' = SUM ( fact_market[floor_area_sold] )
+	measure 'Powierzchnia sprzedana' = SUM ( fact_market[floor_area_sold] )
 		formatString: #,##0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: 667c98a6-f1e1-5faf-809a-5208eda9ac74
 
-	measure 'Share of National Market %' =
+	measure 'Udział w rynku krajowym %' =
 			
 			DIVIDE (
-			    [Dwellings Sold],
-			    CALCULATE ( [Dwellings Sold], REMOVEFILTERS ( dim_territory ) )
+			    [Transakcje],
+			    CALCULATE ( [Transakcje], REMOVEFILTERS ( dim_territory ) )
 			)
 		formatString: 0.0%
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: e5d62cf4-c4b2-5b7e-a180-a19637f9dcad
 
-	measure 'Price Rank' =
+	measure 'Pozycja cenowa' =
 			
 			VAR Ranking =
 			    RANKX (
 			        ALLSELECTED ( dim_territory[teryt_code] ),
-			        CALCULATE ( [Median Price sqm] ),
+			        CALCULATE ( [Mediana ceny m²] ),
 			        ,
 			        DESC,
 			        DENSE
 			    )
 			RETURN
-			    IF ( NOT ISBLANK ( [Median Price sqm] ), Ranking )
+			    IF ( NOT ISBLANK ( [Mediana ceny m²] ), Ranking )
 		formatString: 0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: b7a66fca-986b-5f4d-975c-879a2369295e
 
-	measure Population = SUM ( fact_context[population] )
+	measure 'Ludność' = SUM ( fact_context[population] )
 		formatString: #,##0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: 28e350c2-d3ce-5ebf-a2a1-d9637dad6b09
 
-	measure 'Dwellings Completed' = SUM ( fact_context[dwellings_completed] )
+	measure 'Mieszkania oddane' = SUM ( fact_context[dwellings_completed] )
 		formatString: #,##0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: acaa2ca4-f209-5d93-a784-facf1768a36a
 
-	measure 'Dwellings per 1000' = AVERAGE ( fact_context[dwellings_per_1000] )
+	measure 'Mieszkania na 1000 osób' = AVERAGE ( fact_context[dwellings_per_1000] )
 		formatString: 0.0
-		displayFolder: Market
+		displayFolder: 02 Rynek
 		lineageTag: f8f517f5-1eab-51ad-9864-78044094f2d1
 
-	measure 'Net to Gross' = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "net_to_gross" )
+	measure 'Współczynnik netto' = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "net_to_gross" )
 		formatString: 0.0%
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: de23c77c-78d7-52c4-8a9c-f17ca362248f
 
-	measure 'Bank Margin' = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "bank_margin" )
+	measure 'Marża banku' = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "bank_margin" )
 		formatString: 0.00%
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: a86eb24e-bd8b-5f43-9b2c-1e154c0240f6
 
-	measure 'Min Down Payment' = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "min_down_payment" )
+	measure 'Minimalny wkład własny' = CALCULATE ( MAX ( param_credit[parameter_value] ), param_credit[parameter_name] = "min_down_payment" )
 		formatString: 0.0%
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: cd40e7b0-9837-52ea-ab99-9e5b3f882df9
 
-	measure 'Gross Salary' = AVERAGE ( fact_context[avg_gross_salary] )
+	measure 'Wynagrodzenie brutto' = AVERAGE ( fact_context[avg_gross_salary] )
 		formatString: #,##0 "zł"
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: cd934f39-04b9-5530-9768-af38a8092c3c
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Gross Salary PY' =
+	measure 'Wynagrodzenie rok wcześniej' =
 			
-			VAR PriorYear = [Selected Year] - 1
+			VAR PriorYear = [Wybrany rok] - 1
 			RETURN
-			    CALCULATE ( [Gross Salary], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
+			    CALCULATE ( [Wynagrodzenie brutto], REMOVEFILTERS ( dim_date ), dim_date[year] = PriorYear )
 		formatString: #,##0 "zł"
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: f82a5630-4538-5dd2-94bf-ca8aa816a44d
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Salary YoY %' = DIVIDE ( [Gross Salary] - [Gross Salary PY], [Gross Salary PY] )
+	measure 'Zmiana wynagrodzenia r/r %' = DIVIDE ( [Wynagrodzenie brutto] - [Wynagrodzenie rok wcześniej], [Wynagrodzenie rok wcześniej] )
 		formatString: 0.0%
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 10ffb139-083d-52d3-9576-ef405d6121d7
 
-	measure 'Net Salary' = [Gross Salary] * [Net to Gross]
+	measure 'Wynagrodzenie netto' = [Wynagrodzenie brutto] * [Współczynnik netto]
 		formatString: #,##0 "zł"
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 2779137e-1cdf-51cf-98e9-f707c4fc2a88
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Sqm per Monthly Salary' = DIVIDE ( [Net Salary], [Price sqm] )
+	measure 'm² za pensję' = DIVIDE ( [Wynagrodzenie netto], [Cena m²] )
 		formatString: 0.00
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: e6f06987-d0b4-5105-aa50-a6ce424978ce
 
-	measure 'Years of Work' = DIVIDE ( [Price sqm] * [Floor Area Value], [Net Salary] * 12 )
+	measure 'Lata pracy' = DIVIDE ( [Cena m²] * [Metraż], [Wynagrodzenie netto] * 12 )
 		formatString: 0.0
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 77bedf40-07cf-55ab-81fe-eebd543b68c7
 
-	measure 'Affordability Index' =
+	measure 'Indeks dostępności' =
 			
 			DIVIDE (
-			    [Sqm per Monthly Salary],
-			    CALCULATE ( [Sqm per Monthly Salary], REMOVEFILTERS ( dim_territory ) )
+			    [m² za pensję],
+			    CALCULATE ( [m² za pensję], REMOVEFILTERS ( dim_territory ) )
 			) * 100
 		formatString: 0.0
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 5b81c9cb-029d-520c-b1cf-727b2e3b13a9
 
-	measure 'Median Salary Line' = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Gross Salary] )
+	measure 'Mediana wynagrodzeń' = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Wynagrodzenie brutto] )
 		formatString: #,##0 "zł"
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 2210ce84-e4d5-58a8-b52b-a24fd994175f
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Median Price Line' = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Median Price sqm] )
+	measure 'Mediana cen' = MEDIANX ( VALUES ( dim_territory[teryt_code] ), [Mediana ceny m²] )
 		formatString: #,##0 "zł"
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 8c9b0585-b560-56e8-9be1-747301d7ab7e
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Price vs Salary Growth Ratio' =
+	measure 'Wzrost ceny do płacy' =
 			
 			VAR PriceBase =
-			    CALCULATE ( [Price sqm], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
+			    CALCULATE ( [Cena m²], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
 			VAR SalaryBase =
-			    CALCULATE ( [Gross Salary], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
-			VAR PriceGrowth = DIVIDE ( [Price sqm], PriceBase )
-			VAR SalaryGrowth = DIVIDE ( [Gross Salary], SalaryBase )
+			    CALCULATE ( [Wynagrodzenie brutto], REMOVEFILTERS ( dim_date ), dim_date[year] = 2010 )
+			VAR PriceGrowth = DIVIDE ( [Cena m²], PriceBase )
+			VAR SalaryGrowth = DIVIDE ( [Wynagrodzenie brutto], SalaryBase )
 			RETURN
 			    DIVIDE ( PriceGrowth, SalaryGrowth )
 		formatString: 0.00
-		displayFolder: Affordability
+		displayFolder: 03 Dostępność
 		lineageTag: 5aac3326-6605-5068-a40f-2c7d6d95993b
 
-	measure 'Rate Value' = SELECTEDVALUE ( param_rate[rate], 0.0575 )
+	measure 'Oprocentowanie' = SELECTEDVALUE ( param_rate[rate], 0.0575 )
 		formatString: 0.00%
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: 19232977-eb39-5094-aa59-59cbc5b5bb2e
 
-	measure 'Down Payment Value' = SELECTEDVALUE ( param_down_payment[down_payment], [Min Down Payment] )
+	measure 'Wkład własny' = SELECTEDVALUE ( param_down_payment[down_payment], [Minimalny wkład własny] )
 		formatString: 0.0%
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: ae8b3b40-d486-55e7-8fc7-c825c76213b7
 
-	measure 'Loan Years Value' = SELECTEDVALUE ( param_loan_years[loan_years], 25 )
+	measure 'Okres kredytu' = SELECTEDVALUE ( param_loan_years[loan_years], 25 )
 		formatString: 0
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: 25b7de73-c306-5afb-a5a4-ba60099d07a2
 
-	measure 'Floor Area Value' = SELECTEDVALUE ( param_floor_area[floor_area], 50 )
+	measure 'Metraż' = SELECTEDVALUE ( param_floor_area[floor_area], 50 )
 		formatString: 0
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: 7190fcdc-d7f2-593a-a1bb-ec99ecd9f470
 
-	measure 'Property Price' = [Price sqm] * [Floor Area Value]
+	measure 'Cena mieszkania' = [Cena m²] * [Metraż]
 		formatString: #,##0 "zł"
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: 0e7741af-6b77-5956-b4f4-bf4d4a8f8096
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Loan Amount' = [Property Price] * ( 1 - [Down Payment Value] )
+	measure 'Kwota kredytu' = [Cena mieszkania] * ( 1 - [Wkład własny] )
 		formatString: #,##0 "zł"
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: 3cc9a902-11ed-51b0-a9e0-7b791493e2a9
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Monthly Payment' =
+	measure 'Rata miesięczna' =
 			
-			VAR Principal = [Loan Amount]
-			VAR MonthlyRate = DIVIDE ( [Rate Value] + [Bank Margin], 12 )
-			VAR Months = [Loan Years Value] * 12
+			VAR Principal = [Kwota kredytu]
+			VAR MonthlyRate = DIVIDE ( [Oprocentowanie] + [Marża banku], 12 )
+			VAR Months = [Okres kredytu] * 12
 			RETURN
 			    IF (
 			        MonthlyRate > 0,
@@ -340,16 +340,16 @@ table _measures
 			        DIVIDE ( Principal, Months )
 			    )
 		formatString: #,##0.00 "zł"
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: ccf2e20e-997e-5b18-ae36-2c61c243dcc0
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Monthly Payment at Rate' =
+	measure 'Rata przy stopie' =
 			
-			VAR Principal = [Loan Amount]
-			VAR MonthlyRate = DIVIDE ( MAX ( axis_rate[rate] ) + [Bank Margin], 12 )
-			VAR Months = [Loan Years Value] * 12
+			VAR Principal = [Kwota kredytu]
+			VAR MonthlyRate = DIVIDE ( MAX ( axis_rate[rate] ) + [Marża banku], 12 )
+			VAR Months = [Okres kredytu] * 12
 			RETURN
 			    IF (
 			        MonthlyRate > 0,
@@ -357,63 +357,63 @@ table _measures
 			        DIVIDE ( Principal, Months )
 			    )
 		formatString: #,##0.00 "zł"
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: fb8b24d4-1b68-5ea4-8116-86010630f6c5
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Payment to Income %' = DIVIDE ( [Monthly Payment], [Net Salary] )
+	measure 'Rata do dochodu %' = DIVIDE ( [Rata miesięczna], [Wynagrodzenie netto] )
 		formatString: 0.0%
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: 45e21a22-3763-5c7e-bb75-33b6e5cd5b54
 
-	measure 'PTI Colour' =
+	measure 'Kolor raty' =
 			
 			SWITCH (
 			    TRUE (),
-			    [Payment to Income %] > 0.50, "#D1495B",
-			    [Payment to Income %] > 0.35, "#E08A3C",
+			    [Rata do dochodu %] > 0.50, "#D1495B",
+			    [Rata do dochodu %] > 0.35, "#E08A3C",
 			    "#3BA99C"
 			)
-		displayFolder: Simulator
+		displayFolder: 04 Symulator
 		lineageTag: d9360065-0395-5122-bf36-c3e8ba8f9f96
 
-	measure 'Completeness %' = DIVIDE ( COUNT ( fact_market[median_price_sqm] ), COUNTROWS ( fact_market ) )
+	measure 'Kompletność %' = DIVIDE ( COUNT ( fact_market[median_price_sqm] ), COUNTROWS ( fact_market ) )
 		formatString: 0.0%
-		displayFolder: Quality
+		displayFolder: 05 Jakość
 		lineageTag: f80c2b60-aab8-57f4-b4b5-8cf007b30e7e
 
-	measure 'Counties with Gaps' =
+	measure 'Powiaty z brakami' =
 			
 			COUNTROWS (
 			    FILTER (
 			        VALUES ( dim_territory[teryt_code] ),
-			        ISBLANK ( [Median Price sqm] )
+			        ISBLANK ( [Mediana ceny m²] )
 			    )
 			)
 		formatString: 0
-		displayFolder: Quality
+		displayFolder: 05 Jakość
 		lineageTag: a97c378d-36d3-5988-9277-a189dba37a6d
 
-	measure 'Small Sample Flag' = IF ( NOT ISBLANK ( [Dwellings Sold] ) && [Dwellings Sold] < 10, 1, 0 )
+	measure 'Flaga małej próby' = IF ( NOT ISBLANK ( [Transakcje] ) && [Transakcje] < 10, 1, 0 )
 		formatString: 0
-		displayFolder: Quality
+		displayFolder: 05 Jakość
 		lineageTag: fc7008d8-ec2f-5834-9c7d-87757c5da9ad
 
-	measure 'Reliability Label' = SELECTEDVALUE ( dim_reliability[reliability] )
-		displayFolder: Quality
+	measure 'Wiarygodność' = SELECTEDVALUE ( dim_reliability[reliability] )
+		displayFolder: 05 Jakość
 		lineageTag: 5dc5a72f-96d2-5b06-aaf5-8b0e4c992cce
 
-	measure 'Rank Colour' =
+	measure 'Kolor rankingu' =
 			
 			SWITCH (
 			    TRUE (),
-			    [Small Sample Flag] = 1, "#5A6472",
-			    [Years of Work] > 10,   "#D1495B",
-			    [Years of Work] < 5,    "#3BA99C",
+			    [Flaga małej próby] = 1, "#5A6472",
+			    [Lata pracy] > 10,   "#D1495B",
+			    [Lata pracy] < 5,    "#3BA99C",
 			    "#E8C547"
 			)
-		displayFolder: Quality
+		displayFolder: 05 Jakość
 		lineageTag: 7583b36b-31f7-5d14-9acf-0d53dd8a7f58
 
 	column placeholder

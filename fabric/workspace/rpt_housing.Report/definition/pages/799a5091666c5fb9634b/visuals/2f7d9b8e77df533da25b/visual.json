@@ -3,9 +3,9 @@
   "name": "2f7d9b8e77df533da25b",
   "position": {
     "x": 522,
-    "y": 100,
+    "y": 98,
     "z": 3002,
-    "height": 118,
+    "height": 132,
     "width": 236,
     "tabOrder": 3002
   },
@@ -23,11 +23,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Gross Salary"
+                  "Property": "Wynagrodzenie brutto"
                 }
               },
-              "queryRef": "_measures.Gross Salary",
-              "nativeQueryRef": "Gross Salary"
+              "queryRef": "_measures.Wynagrodzenie brutto",
+              "nativeQueryRef": "Wynagrodzenie brutto"
             }
           ]
         }
@@ -53,7 +53,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "22D"
                 }
               }
             },
@@ -182,7 +182,7 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Salary YoY %"
+                  "Property": "Zmiana wynagrodzenia r/r %"
                 }
               }
             }
@@ -195,7 +195,7 @@
                 }
               }
             ],
-            "metadata": "_measures.Gross Salary",
+            "metadata": "_measures.Wynagrodzenie brutto",
             "id": "field-10ffb139-083d-52d3-9576-ef405d6121d7",
             "order": 0
           }
@@ -355,6 +355,73 @@
                   "Value": "'left'"
                 }
               }
+            },
+            "customizeLines": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridlineWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "topOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "leftOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           },
           "selector": {
@@ -373,9 +440,50 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
         }
       ],
       "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
         {
           "properties": {
             "show": {

@@ -3,9 +3,9 @@
   "name": "06c901f407d27f5c039e",
   "position": {
     "x": 546,
-    "y": 238,
+    "y": 250,
     "z": 3002,
-    "height": 204,
+    "height": 192,
     "width": 702,
     "tabOrder": 3002
   },
@@ -42,11 +42,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "National Median Price sqm"
+                  "Property": "Mediana krajowa m²"
                 }
               },
-              "queryRef": "_measures.National Median Price sqm",
-              "nativeQueryRef": "National Median Price sqm"
+              "queryRef": "_measures.Mediana krajowa m²",
+              "nativeQueryRef": "Mediana krajowa m²"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "_measures"
                   }
                 },
-                "Property": "National Median Price sqm"
+                "Property": "Mediana krajowa m²"
               }
             },
             "direction": "Descending"
@@ -250,7 +250,7 @@
             }
           },
           "selector": {
-            "metadata": "_measures.National Median Price sqm"
+            "metadata": "_measures.Mediana krajowa m²"
           }
         }
       ],
@@ -610,7 +610,7 @@
                 "Entity": "_measures"
               }
             },
-            "Property": "National Median Price sqm"
+            "Property": "Mediana krajowa m²"
           }
         },
         "type": "Advanced"

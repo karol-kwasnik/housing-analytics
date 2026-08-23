@@ -3,9 +3,9 @@
   "name": "f0d61e8022715a2e9933",
   "position": {
     "x": 277,
-    "y": 100,
+    "y": 98,
     "z": 3001,
-    "height": 118,
+    "height": 132,
     "width": 236,
     "tabOrder": 3001
   },
@@ -23,11 +23,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Dwellings Sold"
+                  "Property": "Transakcje"
                 }
               },
-              "queryRef": "_measures.Dwellings Sold",
-              "nativeQueryRef": "Dwellings Sold"
+              "queryRef": "_measures.Transakcje",
+              "nativeQueryRef": "Transakcje"
             }
           ]
         }
@@ -53,7 +53,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "22D"
                 }
               }
             },
@@ -182,7 +182,7 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "Dwellings Sold YoY %"
+                  "Property": "Zmiana transakcji r/r %"
                 }
               }
             }
@@ -195,7 +195,7 @@
                 }
               }
             ],
-            "metadata": "_measures.Dwellings Sold",
+            "metadata": "_measures.Transakcje",
             "id": "field-fe2c103a-3fc1-5f0a-8e4d-00dcbc42b3f3",
             "order": 0
           }
@@ -355,6 +355,73 @@
                   "Value": "'left'"
                 }
               }
+            },
+            "customizeLines": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridlineWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "topOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "leftOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           },
           "selector": {
@@ -373,9 +440,50 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
         }
       ],
       "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
         {
           "properties": {
             "show": {

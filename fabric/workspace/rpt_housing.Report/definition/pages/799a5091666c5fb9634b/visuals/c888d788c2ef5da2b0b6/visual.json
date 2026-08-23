@@ -3,9 +3,9 @@
   "name": "c888d788c2ef5da2b0b6",
   "position": {
     "x": 32,
-    "y": 100,
+    "y": 98,
     "z": 3000,
-    "height": 118,
+    "height": 132,
     "width": 236,
     "tabOrder": 3000
   },
@@ -23,11 +23,11 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "National Median Price sqm"
+                  "Property": "Mediana krajowa m²"
                 }
               },
-              "queryRef": "_measures.National Median Price sqm",
-              "nativeQueryRef": "National Median Price sqm"
+              "queryRef": "_measures.Mediana krajowa m²",
+              "nativeQueryRef": "Mediana krajowa m²"
             }
           ]
         }
@@ -53,7 +53,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "22D"
                 }
               }
             },
@@ -182,7 +182,7 @@
                       "Entity": "_measures"
                     }
                   },
-                  "Property": "National Price sqm YoY %"
+                  "Property": "Zmiana ceny krajowej r/r %"
                 }
               }
             }
@@ -195,7 +195,7 @@
                 }
               }
             ],
-            "metadata": "_measures.National Median Price sqm",
+            "metadata": "_measures.Mediana krajowa m²",
             "id": "field-9eeec1f3-b7ea-559c-b5aa-cb5c13a11839",
             "order": 0
           }
@@ -355,6 +355,73 @@
                   "Value": "'left'"
                 }
               }
+            },
+            "customizeLines": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridlineWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "topOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "leftOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           },
           "selector": {
@@ -373,9 +440,50 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
         }
       ],
       "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
         {
           "properties": {
             "show": {
