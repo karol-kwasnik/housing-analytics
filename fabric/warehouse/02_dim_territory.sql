@@ -27,7 +27,11 @@ SELECT
     c.voivodeship,
     c.subregion_code,
     c.subregion_name,
-    c.county_type,
+    CASE c.county_type
+         WHEN 'city'  THEN 'miasto na prawach powiatu'
+         WHEN 'rural' THEN 'powiat ziemski'
+         ELSE c.county_type
+    END,
     CAST('2010-01-01' AS DATE),
     NULL,
     1

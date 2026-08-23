@@ -16,7 +16,12 @@ BEGIN
       AND (ISNULL(d.unit_name, '')      <> ISNULL(s.name, '')
         OR ISNULL(d.voivodeship, '')    <> ISNULL(s.voivodeship, '')
         OR ISNULL(d.subregion_name, '') <> ISNULL(s.subregion_name, '')
-        OR ISNULL(d.county_type, '')    <> ISNULL(s.county_type, ''));
+        OR ISNULL(d.county_type, '')    <> ISNULL(
+               CASE s.county_type
+                    WHEN 'city'  THEN 'miasto na prawach powiatu'
+                    WHEN 'rural' THEN 'powiat ziemski'
+                    ELSE s.county_type
+               END, ''));
 
     INSERT INTO dbo.dim_territory
         (territory_sk, teryt_code, unit_name, level_name, voivodeship,
@@ -30,7 +35,11 @@ BEGIN
         s.voivodeship,
         s.subregion_code,
         s.subregion_name,
-        s.county_type,
+        CASE s.county_type
+             WHEN 'city'  THEN 'miasto na prawach powiatu'
+             WHEN 'rural' THEN 'powiat ziemski'
+             ELSE s.county_type
+        END,
         @today,
         NULL,
         1
