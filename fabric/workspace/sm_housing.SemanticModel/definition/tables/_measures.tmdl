@@ -182,17 +182,19 @@ table _measures
 	measure 'Pozycja cenowa' =
 			
 			VAR Val = [Mediana ceny m²]
-			RETURN
-			    IF (
-			        NOT ISBLANK ( Val ),
+			VAR Ranked =
+			    CALCULATE (
 			        RANKX (
-			            ALL ( dim_territory[teryt_code] ),
+			            VALUES ( dim_territory[teryt_code] ),
 			            CALCULATE ( [Mediana ceny m²] ),
 			            Val,
 			            DESC,
 			            DENSE
-			        )
+			        ),
+			        REMOVEFILTERS ( dim_territory )
 			    )
+			RETURN
+			    IF ( NOT ISBLANK ( Val ), Ranked )
 		formatString: 0
 		displayFolder: 02 Rynek
 		lineageTag: b7a66fca-986b-5f4d-975c-879a2369295e
