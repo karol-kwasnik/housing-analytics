@@ -1,6 +1,3 @@
-DROP PROCEDURE IF EXISTS dbo.sp_merge_dim_territory;
-GO
-
 CREATE PROCEDURE dbo.sp_merge_dim_territory
 AS
 BEGIN
@@ -49,4 +46,3 @@ BEGIN
        AND d.is_current = 1
     WHERE d.teryt_code IS NULL;
 END
-GO
