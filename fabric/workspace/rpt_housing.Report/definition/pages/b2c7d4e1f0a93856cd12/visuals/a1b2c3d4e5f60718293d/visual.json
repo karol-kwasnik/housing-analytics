@@ -1,0 +1,873 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "a1b2c3d4e5f60718293d",
+  "position": {
+    "x": 36,
+    "y": 112,
+    "z": 2000,
+    "height": 662,
+    "width": 806,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#262D38'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Powiaty w układzie hierarchicznym'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B7280'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_territory"
+                    }
+                  },
+                  "Property": "voivodeship"
+                }
+              },
+              "queryRef": "dim_territory.voivodeship",
+              "nativeQueryRef": "Województwo",
+              "displayName": "Województwo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_territory"
+                    }
+                  },
+                  "Property": "subregion_name"
+                }
+              },
+              "queryRef": "dim_territory.subregion_name",
+              "nativeQueryRef": "Podregion",
+              "displayName": "Podregion"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_territory"
+                    }
+                  },
+                  "Property": "unit_name"
+                }
+              },
+              "queryRef": "dim_territory.unit_name",
+              "nativeQueryRef": "Powiat",
+              "displayName": "Powiat"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Cena m²"
+                }
+              },
+              "queryRef": "_measures.Cena m²",
+              "nativeQueryRef": "Mediana zł/m²",
+              "displayName": "Mediana zł/m²"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Zmiana ceny r/r %"
+                }
+              },
+              "queryRef": "_measures.Zmiana ceny r/r %",
+              "nativeQueryRef": "r/r",
+              "displayName": "r/r"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Transakcje"
+                }
+              },
+              "queryRef": "_measures.Transakcje",
+              "nativeQueryRef": "Transakcje",
+              "displayName": "Transakcje"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Lata pracy"
+                }
+              },
+              "queryRef": "_measures.Lata pracy",
+              "nativeQueryRef": "Lata pracy",
+              "displayName": "Lata pracy"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B7280'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "outlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'BottomOnly'"
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#262D38'"
+                    }
+                  }
+                }
+              }
+            },
+            "outlineWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E8EAED'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "steppedLayout": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "steppedLayoutIndentation": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "outlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1D222B'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridHorizontalWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "outlineWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E8EAED'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E8EAED'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#161A21'"
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Consolas'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Cena m²"
+          }
+        },
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Consolas'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Zmiana ceny r/r %"
+          }
+        },
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Consolas'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Transakcje"
+          }
+        },
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Consolas'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Lata pracy"
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "dataBars": {
+              "positiveColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#D1495B'"
+                      }
+                    }
+                  }
+                }
+              },
+              "negativeColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#3BA99C'"
+                      }
+                    }
+                  }
+                }
+              },
+              "axisColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#262D38'"
+                      }
+                    }
+                  }
+                }
+              },
+              "reverseDirection": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "hideText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Lata pracy"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "240D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_territory.voivodeship"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Cena m²"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Zmiana ceny r/r %"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Transakcje"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "140D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_measures.Lata pracy"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -57,12 +57,12 @@ table _measures
 		displayFolder: 01 Ceny
 		lineageTag: 63956c90-ba9b-512e-92fc-833842efe24d
 
-	measure 'Mediana m² rok wcześniej' =
+	measure 'Cena m² rok wcześniej' =
 			
 			VAR PriorYear = [Wybrany rok] - 1
 			RETURN
 			    CALCULATE (
-			        [Mediana ceny m²],
+			        [Cena m²],
 			        REMOVEFILTERS ( dim_date ),
 			        dim_date[year] = PriorYear
 			    )
@@ -87,7 +87,7 @@ table _measures
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	measure 'Zmiana ceny r/r %' = DIVIDE ( [Mediana ceny m²] - [Mediana m² rok wcześniej], [Mediana m² rok wcześniej] )
+	measure 'Zmiana ceny r/r %' = DIVIDE ( [Cena m²] - [Cena m² rok wcześniej], [Cena m² rok wcześniej] )
 		formatString: 0.0%
 		displayFolder: 01 Ceny
 		lineageTag: 1479328d-5ba4-5b82-b8b4-3822e93bf74b
