@@ -3,8 +3,8 @@
   "name": "799a5091666c5fb9634b",
   "displayName": "Przegląd krajowy",
   "displayOption": "ActualSize",
-  "height": 900,
-  "width": 1600,
+  "height": 810,
+  "width": 1440,
   "filterConfig": {
     "filters": [
       {
@@ -228,14 +228,14 @@
           "pageSizeWidth": {
             "expr": {
               "Literal": {
-                "Value": "1600D"
+                "Value": "1440D"
               }
             }
           },
           "pageSizeHeight": {
             "expr": {
               "Literal": {
-                "Value": "900D"
+                "Value": "810D"
               }
             }
           }

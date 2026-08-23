@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "c888d788c2ef5da2b0b6",
   "position": {
-    "x": 40,
-    "y": 124,
+    "x": 36,
+    "y": 112,
     "z": 3000,
-    "height": 150,
-    "width": 296,
+    "height": 136,
+    "width": 264,
     "tabOrder": 3000
   },
   "visual": {
@@ -34,19 +34,6 @@
       }
     },
     "objects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "value": [
         {
           "properties": {
@@ -634,6 +621,19 @@
               "expr": {
                 "Literal": {
                   "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
